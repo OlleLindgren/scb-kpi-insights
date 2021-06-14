@@ -14,11 +14,8 @@ def _read_csv(filename):
         result[col] = result[col].astype(float)
     return result
 
+def diff(df):
+    return (df - df.shift(1, axis=1)).drop(columns=df.columns[0])
+
 values = _read_csv(os.path.join(DATA_DIR, 'values.csv'))
 weights = _read_csv(os.path.join(DATA_DIR, 'weights.csv'))
-
-diffs = (values - values.shift(1, axis=1)).drop(columns=values.columns[0])
-log_diffs = (values.apply(np.log) - values.shift(1, axis=1).apply(np.log)).drop(columns=values.columns[0])
-
-weighted_diffs = diffs.multiply(weights)[weights.columns.intersection(diffs.columns)]
-weighted_log_diffs = log_diffs.multiply(weights)[weights.columns.intersection(diffs.columns)]
