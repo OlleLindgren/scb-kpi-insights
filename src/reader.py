@@ -4,7 +4,7 @@ import os
 
 from settings import DATA_DIR
 
-def _read_csv(filename):
+def _read_csv(filename: str) -> pd.DataFrame:
     result = pd.read_csv(
         filename, 
         encoding='latin1', 
@@ -14,7 +14,7 @@ def _read_csv(filename):
         result[col] = result[col].astype(float)
     return result
 
-def diff(df):
+def diff(df: pd.DataFrame) -> pd.DataFrame:
     return (df - df.shift(1, axis=1)).drop(columns=df.columns[0])
 
 values = _read_csv(os.path.join(DATA_DIR, 'values.csv'))

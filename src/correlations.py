@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import pandas as pd 
 
-def correlate(df1, df2):
+def correlate(df1: pd.DataFrame, df2: pd.DataFrame) -> float:
     
     _ix = df1.dropna(axis=0).dropna(axis=1).index.intersection(df2.index)
     _cols = df1.dropna(axis=0).dropna(axis=1).columns.intersection(df2.columns)
